@@ -1,15 +1,15 @@
 import { useState } from "react";
-import Quiz from "./components/Quiz";
-import StartQuiz from "./components/StartQuiz";
+import Start from "./components/Start";
+import Container from "./components/Container";
 
 const App = () => {
-    const [StartQuizFlag, setStartQuizFlag] = useState(false);
+    const [startFlag, setStartFlag] = useState(false);
 
     return (
-        <div className="App">
-            {!StartQuizFlag && <StartQuiz setStartQuizFlag={setStartQuizFlag} />}
-            {StartQuizFlag && <Quiz />}
-        </div>
+        <>
+            {!startFlag && <Start setStartFlag={setStartFlag} />}
+            {startFlag && <Container />}
+        </>
     );
 }
 
