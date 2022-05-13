@@ -20,38 +20,42 @@ const Questions = ({ quizData, setQUizData, score, setScore, submitted, setSubmi
 
     return (
         <>
-            <div className="quiz-questions">
+            <div className="question-container">
                 {quizData.map(item => {
                     return (
-                        <div key={quizData.indexOf(item)}>
-                            <p>{item.question}</p>
+                        <div key={quizData.indexOf(item)} className='question'>
+                            <div className='question-text'>
+                                <p>{item.question}</p>
+                            </div>
 
-                            {item.options.map(option => {
-                                return (
-                                    submitted ? (
-                                        <span key={item.options.indexOf(option)}
-                                            value = {option}
-                                            style={{color: option === item.correct_answer ? 'green' : option === item.clickedOption && 'orange'}}
-                                        >
-                                            {option}
-                                        </span>
-                                    )
-                                    : (
-                                        <button key={item.options.indexOf(option)} 
-                                            value = {option}
-                                            onClick={(event) => {handleClick(event, item.question)}}
-                                        >
-                                            {option}
-                                        </button>
-                                    )
-                                );
-                            })}
+                            <div className='question-options'>
+                                {item.options.map(option => {
+                                    return (
+                                        submitted ? (
+                                            <span key={item.options.indexOf(option)}
+                                                value = {option}
+                                                style={{color: option === item.correct_answer ? 'green' : option === item.clickedOption && 'orange'}}
+                                            >
+                                                {option}
+                                            </span>
+                                        )
+                                        : (
+                                            <button key={item.options.indexOf(option)} 
+                                                value = {option}
+                                                onClick={(event) => {handleClick(event, item.question)}}
+                                            >
+                                                {option}
+                                            </button>
+                                        )
+                                    );
+                                })}
+                            </div>
                         </div>
                     );
                 })}
             </div>
 
-            {!submitted && <button onClick={() => {setSubmitted(true)}}>Check answer</button>}
+            {/* {!submitted && <button onClick={() => {setSubmitted(true)}}>Check answer</button>} */}
 
             {submitted && <p>You scored {score}/5 correct answers.</p>}
             {submitted && <button onClick={() => {setPlayAgain(true); setSubmitted(false); setScore(0);}}>Play again</button>}
