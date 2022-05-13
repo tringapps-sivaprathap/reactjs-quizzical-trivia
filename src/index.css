@@ -4,42 +4,146 @@
     box-sizing: border-box;
 }
 
-/* .start-page {
+body {
+    background-color: #123C69;
+}
+
+/* starting page */
+.start-page {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     height: 100vh;
-    background-color: lightblue;
+}
+
+.start-page > * {
+    margin: 2rem;
+}
+
+.start-page p {
+    font-size: 3rem;
+    color: white;
 }
 
 .start-page button {
     font-size: 1.5rem;
     padding: 1rem;
     border: 1px solid black;
-} */
+    background-color: #F8E9A1;
+}
 
+/* quiz container */
 .quiz-container {
-    background-color: lightblue;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    flex-direction: column;
 }
 
-.question-container > * {
+/* question container */
+.question-container {
     margin: 1rem;
-    background-color: lightgoldenrodyellow;
+    background-color: #F8E9A1;
+    max-width: 60vw;
+    border-radius: 20px;
 }
 
-.question-text {
-    font-size: 1rem;
-    margin: 1rem;
+.question {
+    font-size: 1.3rem;
+    padding: 1rem;
 }
 
-.question-options > * {
-    margin: 1rem;
+.question p {
+    line-height: 1.5;
 }
 
-.question-options button {
+.options {
+    padding: .5rem;
+}
+
+.options button {
     padding: .5vh .5vw;
+    margin: .5rem;
+    font-size: 1.1rem;
+    background-color:  #EEE2DC;
+    border: none;
+    box-shadow: 1px 1px 3px;
+}
+
+.options button:active {
+    box-shadow: 2px 2px 5px;
+}
+
+.options span {
+    display: inline-block;
+    padding: .5vh .5vw;
+    margin: .5rem;
+    font-size: 1.2rem;
+    box-shadow: 1px 1px 3px;
+}
+
+/* types of options - right, wrong, others */
+.other-option {
+    background-color: #EEE2DC;
+}
+
+.correct-option {
+    background-color: lightgreen;
+}
+
+.wrong-option {
+    background-color: #FFB48F;
+    text-decoration: line-through;
+}
+
+/* submit and playagain div */
+.submit-button {
+    padding: 1rem;
+}
+
+.submit-button button {
+    padding: 1vh 1vw;
+    font-size: 1.3rem;
+    background-color: #AC3B61;
+    color: white;
+    border: 1px solid black;
+}
+
+.playagain-button {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.playagain-button > * {
+    margin: 2vh 0;
+}
+
+.playagain-button p {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.playagain-button button {
+    padding: 1vh 1vw;
+    font-size: 1.3rem;
+    background-color: #AC3B61;
+    color: white;
+    border: 1px solid black;
+}
+
+/* messages */
+.loading-message {
+    color: white;
+    font-size: 2rem;
+    margin-top: 10vh;
+}
+
+.empty-error, .fetch-error {
+    color: red;
+    font-size: 2rem;
+    margin-top: 10vh;   
 }

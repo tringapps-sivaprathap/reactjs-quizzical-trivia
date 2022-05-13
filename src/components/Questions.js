@@ -1,4 +1,6 @@
-const Questions = ({ quizData, setQUizData, score, setScore, submitted, setSubmitted, setPlayAgain }) => {
+import {decode} from 'html-entities';
+
+const Questions = ({ quizData, setQUizData, score, setScore, submitted, setSubmitted, playAgain, setPlayAgain, setLoaded, setFetched }) => {
 
     const handleClick = (event, clickedQuestion) => {
     let clickedOption = event.target.value;
@@ -20,31 +22,32 @@ const Questions = ({ quizData, setQUizData, score, setScore, submitted, setSubmi
 
     return (
         <>
-            <div className="question-container">
+            <div>
                 {quizData.map(item => {
                     return (
-                        <div key={quizData.indexOf(item)} className='question'>
-                            <div className='question-text'>
-                                <p>{item.question}</p>
+                        <div key={quizData.indexOf(item)} className='question-container'>
+                            <div className='question'>
+                                <p>{decode(item.question)}</p>
                             </div>
 
-                            <div className='question-options'>
+                            <div className='options'>
                                 {item.options.map(option => {
                                     return (
                                         submitted ? (
                                             <span key={item.options.indexOf(option)}
                                                 value = {option}
-                                                style={{color: option === item.correct_answer ? 'green' : option === item.clickedOption && 'orange'}}
+                                                className={option === item.correct_answer ? 'correct-option' : option === item.clickedOption ? 'wrong-option': 'other-option'}
                                             >
-                                                {option}
+                                                {decode(option)}
                                             </span>
                                         )
                                         : (
                                             <button key={item.options.indexOf(option)} 
                                                 value = {option}
-                                                onClick={(event) => {handleClick(event, item.question)}}
+                                                onClick={(event) => {handleClick(event, item.question)}}                                             
+                                                style={{backgroundColor: option === item.clickedOption && 'yellow'}}
                                             >
-                                                {option}
+                                                {decode(option)}
                                             </button>
                                         )
                                     );
@@ -55,10 +58,11 @@ const Questions = ({ quizData, setQUizData, score, setScore, submitted, setSubmi
                 })}
             </div>
 
-            {/* {!submitted && <button onClick={() => {setSubmitted(true)}}>Check answer</button>} */}
-
-            {submitted && <p>You scored {score}/5 correct answers.</p>}
-            {submitted && <button onClick={() => {setPlayAgain(true); setSubmitted(false); setScore(0);}}>Play again</button>}
+            <div className={submitted ? 'playagain-button' : 'submit-button'}>
+                {!submitted && <button onClick={() => {setSubmitted(true)}}>Check answer</button>}
+                {submitted && <p>You scored {score}/5 correct answers.</p>}
+                {submitted && <button onClick={() => {setPlayAgain(!playAgain); setSubmitted(false); setScore(0); setLoaded(false); setFetched(false)}}>Play again</button>}
+            </div>
         </>
     );
 }

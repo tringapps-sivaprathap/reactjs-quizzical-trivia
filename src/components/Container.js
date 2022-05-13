@@ -36,7 +36,7 @@ const Container = () => {
                 setFetched(true);
           })
           .catch(() => setLoaded(true))
-    }, [REACT_APP_DOMAIN_NAME, playAgain])
+    }, [playAgain])
 
     const showQuestions = () => {
         if(fetched) {
@@ -46,12 +46,13 @@ const Container = () => {
                         quizData={quizData} setQUizData={setQUizData}
                         score={score} setScore={setScore}
                         submitted={submitted} setSubmitted={setSubmitted}
-                        setPlayAgain={setPlayAgain}
+                        playAgain={playAgain} setPlayAgain={setPlayAgain}
+                        setLoaded={setLoaded} setFetched={setFetched}
                     />
                 );
             }
             else
-                return <p className="empty-error">No Users Available</p>
+                return <p className="empty-error">No Questions Available</p>
         }
         else {
             return <p className="fetch-error">Failed to fetch</p>
@@ -60,7 +61,7 @@ const Container = () => {
 
     return (
         <div className="quiz-container">
-            {loaded ? showQuestions() : <p>Loading...</p>}
+            {loaded ? showQuestions() : <p className="loading-message">Loading...</p>}
         </div>
     );
 }
